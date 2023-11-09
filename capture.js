@@ -182,6 +182,7 @@
   }
 
   function stopCapture() {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     if (captureInterval) {
       clearInterval(captureInterval)
     }
@@ -191,6 +192,15 @@
     document.getElementById('stopbutton').style.display = 'none'
     document.getElementById('step2').style.display = 'none'
     document.getElementById('step3').style.display = 'block'
+
+    let length
+
+    if (isMobile) {
+      length = dataImage.length - 1
+    } else {
+      length = dataImage.length
+    }
+
 
     for (let index = 0; index < dataImage.length; index++) {
       displayImage(index)
