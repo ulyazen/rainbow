@@ -169,14 +169,9 @@
     captureInterval = setInterval(function () {
       takepicture()
       captureCount++
-      if (isMobile) {
-        if (captureCount >= 9) {
-          stopCapture()
-        }
-      } else {
-        if (captureCount >= 8) {
-          stopCapture()
-        }
+
+      if (captureCount >= 8) {
+        stopCapture()
       }
     }, 500)
   }
@@ -200,7 +195,6 @@
     } else {
       length = dataImage.length
     }
-
 
     for (let index = 0; index < dataImage.length; index++) {
       displayImage(index)
