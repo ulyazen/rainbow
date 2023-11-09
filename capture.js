@@ -195,6 +195,7 @@
   }
 
   function displayImage(data) {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     const container = document.getElementById('container')
     const outputDiv = document.createElement('div')
     outputDiv.className = 'output'
@@ -209,12 +210,23 @@
       overlayColorsRGB[data % overlayColors.length]
 
     const img = document.createElement('img')
-    img.src = dataImage[data+1]
+
+    if (isMobile) {
+      img.src = dataImage[data]
+    } else {
+      img.src = dataImage[data + 1]
+    }
+
     img.id = 'photo'
     img.alt = 'Captured Image'
 
     const downloadButton = document.createElement('a')
-    downloadButton.href = dataImage[data+1]
+    if (isMobile) {
+      downloadButton.href = dataImage[data]
+    } else {
+      downloadButton.href = dataImage[data + 1]
+    }
+
     downloadButton.download = 'captured_image.png'
     downloadButton.textContent = 'Download'
     downloadButton.style.color = '#fff'
