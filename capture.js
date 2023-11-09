@@ -160,6 +160,7 @@
   }
 
   function startCapture() {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     if (captureInterval) {
       clearInterval(captureInterval)
     }
@@ -168,8 +169,14 @@
     captureInterval = setInterval(function () {
       takepicture()
       captureCount++
-      if (captureCount >= 8) {
-        stopCapture()
+      if (isMobile) {
+        if (captureCount >= 9) {
+          stopCapture()
+        }
+      } else {
+        if (captureCount >= 8) {
+          stopCapture()
+        }
       }
     }, 500)
   }
