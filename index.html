@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="main.css" type="text/css" media="all" />
+    <script src="capture.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="contentarea">
+      <div id="step1">
+        <div class="camera">
+          <video id="video">Video stream not available.</video>
+        </div>
+        <button id="startbutton">Start Capture</button>
+        <canvas id="canvas" style="display: none"></canvas>
+      </div>
+
+      <div id="step2" style="display: none; position: relative">
+        <div class="output">
+          <img id="photo" alt="The screen capture will appear in this box." />
+        </div>
+      </div>
+
+      <div id="step3" style="display: none">
+        <button id="retrybutton">Retry</button>
+        <div id="container" class="container"></div>
+      </div>
+
+      <canvas id="canvas" style="display: none"></canvas>
+      <button id="stopbutton" style="display: none">Stop Capture</button>
+    </div>
+  </body>
+</html>
