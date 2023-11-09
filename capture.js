@@ -212,7 +212,7 @@
     const img = document.createElement('img')
 
     if (isMobile) {
-      img.src = dataImage[data]
+      img.src = dataImage[data + 2]
     } else {
       img.src = dataImage[data + 1]
     }
@@ -222,7 +222,7 @@
 
     const downloadButton = document.createElement('a')
     if (isMobile) {
-      downloadButton.href = dataImage[data]
+      downloadButton.href = dataImage[data + 2]
     } else {
       downloadButton.href = dataImage[data + 1]
     }
