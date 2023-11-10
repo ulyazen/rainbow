@@ -154,6 +154,12 @@
           setTimeout(function () {
             outputDiv.removeChild(overlayDiv)
           }, 500) // Adjust the delay as needed (e.g., 2000 milliseconds for 2 seconds)
+          // Hide the "Stop Capture" button
+        }
+        if (captureCount === 7) {
+          document.getElementById('stopbutton').style.display = 'none'
+          document.getElementById('step2').style.display = 'none'
+          document.getElementById('step3').style.display = 'block'
         }
       } else {
         // Create a transparent overlay div with different colors
