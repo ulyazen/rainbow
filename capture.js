@@ -148,7 +148,6 @@
       var outputDiv = document.querySelector('.output')
       outputDiv.appendChild(overlayDiv)
 
-
       // Remove the overlay element after displaying the image
       setTimeout(function () {
         outputDiv.removeChild(overlayDiv)
@@ -157,7 +156,6 @@
       var data = canvas.toDataURL('image/png')
       dataImage.push(data)
       photo.setAttribute('src', data)
-
     } else {
       clearphoto()
     }
@@ -172,7 +170,7 @@
     captureInterval = setInterval(function () {
       takepicture()
       captureCount++
-      if(isMobile) {
+      if (isMobile) {
         if (captureCount >= 9) {
           stopCapture()
         }
@@ -201,7 +199,12 @@
 
     var container = document.getElementById('container')
     var lastOutputDiv = container.lastChild
-    container.removeChild(lastOutputDiv)
+    if (isMobile) {
+      list.removeChild(list.children[7])
+      list.removeChild(list.children[8])
+    } else {
+      container.removeChild(lastOutputDiv)
+    }
   }
 
   function displayImage(data) {
