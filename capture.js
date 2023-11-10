@@ -223,7 +223,7 @@
     let length
 
     if(isMobile){
-      length = dataImage.length + 1
+      length = dataImage.length -2
     } else {
       length = dataImage.length
     }
@@ -234,7 +234,7 @@
 
     var container = document.getElementById('container')
     var lastOutputDiv = container.lastChild
-    container.removeChild(lastOutputDiv)
+
   }
 
   function displayImage(data) {
