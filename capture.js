@@ -200,8 +200,8 @@
     var container = document.getElementById('container')
     var lastOutputDiv = container.lastChild
     if (isMobile) {
-      list.removeChild(list.children[7])
-      list.removeChild(list.children[8])
+      container.removeChild(container.children[7])
+      container.removeChild(lastOutputDiv)
     } else {
       container.removeChild(lastOutputDiv)
     }
