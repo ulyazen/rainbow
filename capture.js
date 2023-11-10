@@ -129,7 +129,7 @@
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     var context = canvas.getContext('2d')
     if (width && height) {
-      if (isMobile && captureCount <= 7) {
+      if (isMobile && captureCount <= 6) {
         canvas.width = width
         canvas.height = height
         context.drawImage(video, 0, 0, width, height)
