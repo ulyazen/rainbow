@@ -220,7 +220,15 @@
     document.getElementById('step2').style.display = 'none'
     document.getElementById('step3').style.display = 'block'
 
-    for (let index = 0; index < dataImage.length; index++) {
+    let length
+
+    if(isMobile){
+      length = dataImage.length + 1
+    } else {
+      length = dataImage.length
+    }
+
+    for (let index = 0; index < length; index++) {
       displayImage(index)
     }
 
