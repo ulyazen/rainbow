@@ -209,12 +209,12 @@
       overlayColorsRGB[data % overlayColors.length]
 
     const img = document.createElement('img')
-    img.src = dataImage[data+1]
+    img.src = dataImage[data+2]
     img.id = 'photo'
     img.alt = 'Captured Image'
 
     const downloadButton = document.createElement('a')
-    downloadButton.href = dataImage[data+1]
+    downloadButton.href = dataImage[data+2]
     downloadButton.download = 'captured_image.png'
     downloadButton.textContent = 'Download'
     downloadButton.style.color = '#fff'
