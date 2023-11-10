@@ -128,32 +128,36 @@
   function takepicture() {
     var context = canvas.getContext('2d')
     if (width && height) {
-      canvas.width = width
-      canvas.height = height
-      context.drawImage(video, 0, 0, width, height)
+      if (captureCount < 9) {
+        canvas.width = width
+        canvas.height = height
+        context.drawImage(video, 0, 0, width, height)
 
-      // Create a transparent overlay div with different colors
-      var overlayIndex = captureCount % overlayColors.length
-      var overlayDiv = document.createElement('div')
-      overlayDiv.style.width = '100%'
-      overlayDiv.style.height = '100%'
-      overlayDiv.style.position = 'absolute'
-      overlayDiv.style.backgroundColor = overlayColors[overlayIndex]
-      overlayDiv.style.opacity = '0.8'
-      overlayDiv.style.top = '0'
+        // Create a transparent overlay div with different colors
+        var overlayIndex = captureCount % overlayColors.length
+        var overlayDiv = document.createElement('div')
+        overlayDiv.style.width = '100%'
+        overlayDiv.style.height = '100%'
+        overlayDiv.style.position = 'absolute'
+        overlayDiv.style.backgroundColor = overlayColors[overlayIndex]
+        overlayDiv.style.opacity = '0.8'
+        overlayDiv.style.top = '0'
 
-      // Append the overlay div to the "output" element
-      var outputDiv = document.querySelector('.output')
-      outputDiv.appendChild(overlayDiv)
+        // Append the overlay div to the "output" element
+        var outputDiv = document.querySelector('.output')
+        outputDiv.appendChild(overlayDiv)
+
+         // Remove the overlay element after displaying the image
+      setTimeout(function () {
+        outputDiv.removeChild(overlayDiv)
+      }, 500) // Adjust the delay as needed (e.g., 2000 milliseconds for 2 seconds)
+      }
 
       var data = canvas.toDataURL('image/png')
       dataImage.push(data)
       photo.setAttribute('src', data)
 
-      // Remove the overlay element after displaying the image
-      setTimeout(function () {
-        outputDiv.removeChild(overlayDiv)
-      }, 500) // Adjust the delay as needed (e.g., 2000 milliseconds for 2 seconds)
+
     } else {
       clearphoto()
     }
@@ -169,9 +173,14 @@
     captureInterval = setInterval(function () {
       takepicture()
       captureCount++
-
-      if (captureCount >= 8) {
-        stopCapture()
+      if (isMobile) {
+        if (captureCount >= 9) {
+          stopCapture()
+        }
+      } else {
+        if (captureCount >= 8) {
+          stopCapture()
+        }
       }
     }, 500)
   }
