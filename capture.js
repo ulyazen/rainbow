@@ -128,7 +128,7 @@
   function takepicture() {
     var context = canvas.getContext('2d')
     if (width && height) {
-      if (captureCount <= 8) {
+      if (captureCount < 6) {
         canvas.width = width
         canvas.height = height
         context.drawImage(video, 0, 0, width, height)
