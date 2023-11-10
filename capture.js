@@ -126,67 +126,40 @@
   // other changes before drawing it.
 
   function takepicture() {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     var context = canvas.getContext('2d')
     if (width && height) {
-      if (isMobile && captureCount <= 6) {
-        canvas.width = width
-        canvas.height = height
-        context.drawImage(video, 0, 0, width, height)
+      canvas.width = width
+      canvas.height = height
+      context.drawImage(video, 0, 0, width, height)
 
-        // Create a transparent overlay div with different colors
-        var overlayIndex = captureCount % overlayColors.length
-        var overlayDiv = document.createElement('div')
-        overlayDiv.style.width = '100%'
-        overlayDiv.style.height = '100%'
-        overlayDiv.style.position = 'absolute'
-        overlayDiv.style.backgroundColor = overlayColors[overlayIndex]
-        overlayDiv.style.opacity = '0.8'
-        overlayDiv.style.top = '0'
+      // Create a transparent overlay div with different colors
+      var overlayIndex = captureCount % overlayColors.length
+      var overlayDiv = document.createElement('div')
+      overlayDiv.style.width = '100%'
+      overlayDiv.style.height = '100%'
+      overlayDiv.style.position = 'absolute'
+      overlayDiv.style.backgroundColor = overlayColors[overlayIndex]
+      overlayDiv.style.opacity = '0.8'
+      overlayDiv.style.top = '0'
 
-        // Append the overlay div to the "output" element
-        var outputDiv = document.querySelector('.output')
-        outputDiv.appendChild(overlayDiv)
-
-        // Remove the overlay element after displaying the image
-        setTimeout(function () {
-          outputDiv.removeChild(overlayDiv)
-        }, 500) // Adjust the delay as needed (e.g., 2000 milliseconds for 2 seconds)
-      } else {
-        canvas.width = width
-        canvas.height = height
-        context.drawImage(video, 0, 0, width, height)
-
-        // Create a transparent overlay div with different colors
-        var overlayIndex = captureCount % overlayColors.length
-        var overlayDiv = document.createElement('div')
-        overlayDiv.style.width = '100%'
-        overlayDiv.style.height = '100%'
-        overlayDiv.style.position = 'absolute'
-        overlayDiv.style.backgroundColor = overlayColors[overlayIndex]
-        overlayDiv.style.opacity = '0.8'
-        overlayDiv.style.top = '0'
-
-        // Append the overlay div to the "output" element
-        var outputDiv = document.querySelector('.output')
-        outputDiv.appendChild(overlayDiv)
-
-        // Remove the overlay element after displaying the image
-        setTimeout(function () {
-          outputDiv.removeChild(overlayDiv)
-        }, 500) // Adjust the delay as needed (e.g., 2000 milliseconds for 2 seconds)
-      }
+      // Append the overlay div to the "output" element
+      var outputDiv = document.querySelector('.output')
+      outputDiv.appendChild(overlayDiv)
 
       var data = canvas.toDataURL('image/png')
       dataImage.push(data)
       photo.setAttribute('src', data)
+
+      // Remove the overlay element after displaying the image
+      setTimeout(function () {
+        outputDiv.removeChild(overlayDiv)
+      }, 500) // Adjust the delay as needed (e.g., 2000 milliseconds for 2 seconds)
     } else {
       clearphoto()
     }
   }
 
   function startCapture() {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     if (captureInterval) {
       clearInterval(captureInterval)
     }
@@ -195,20 +168,13 @@
     captureInterval = setInterval(function () {
       takepicture()
       captureCount++
-      if (isMobile) {
-        if (captureCount >= 9) {
-          stopCapture()
-        }
-      } else {
-        if (captureCount >= 8) {
-          stopCapture()
-        }
+      if (captureCount >= 8) {
+        stopCapture()
       }
     }, 500)
   }
 
   function stopCapture() {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     if (captureInterval) {
       clearInterval(captureInterval)
     }
@@ -218,14 +184,6 @@
     document.getElementById('stopbutton').style.display = 'none'
     document.getElementById('step2').style.display = 'none'
     document.getElementById('step3').style.display = 'block'
-
-    let length
-
-    if (isMobile) {
-      length = dataImage.length - 1
-    } else {
-      length = dataImage.length
-    }
 
     for (let index = 0; index < dataImage.length; index++) {
       displayImage(index)
@@ -237,7 +195,6 @@
   }
 
   function displayImage(data) {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     const container = document.getElementById('container')
     const outputDiv = document.createElement('div')
     outputDiv.className = 'output'
@@ -252,23 +209,12 @@
       overlayColorsRGB[data % overlayColors.length]
 
     const img = document.createElement('img')
-
-    if (isMobile) {
-      img.src = dataImage[data + 2]
-    } else {
-      img.src = dataImage[data + 1]
-    }
-
+    img.src = dataImage[data+1]
     img.id = 'photo'
     img.alt = 'Captured Image'
 
     const downloadButton = document.createElement('a')
-    if (isMobile) {
-      downloadButton.href = dataImage[data + 2]
-    } else {
-      downloadButton.href = dataImage[data + 1]
-    }
-
+    downloadButton.href = dataImage[data+1]
     downloadButton.download = 'captured_image.png'
     downloadButton.textContent = 'Download'
     downloadButton.style.color = '#fff'
