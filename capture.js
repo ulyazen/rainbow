@@ -128,7 +128,7 @@
   function takepicture() {
     var context = canvas.getContext('2d')
     if (width && height) {
-      if (captureCount < 9) {
+      if (captureCount <= 8) {
         canvas.width = width
         canvas.height = height
         context.drawImage(video, 0, 0, width, height)
@@ -147,17 +147,15 @@
         var outputDiv = document.querySelector('.output')
         outputDiv.appendChild(overlayDiv)
 
-         // Remove the overlay element after displaying the image
-      setTimeout(function () {
-        outputDiv.removeChild(overlayDiv)
-      }, 500) // Adjust the delay as needed (e.g., 2000 milliseconds for 2 seconds)
+        // Remove the overlay element after displaying the image
+        setTimeout(function () {
+          outputDiv.removeChild(overlayDiv)
+        }, 500) // Adjust the delay as needed (e.g., 2000 milliseconds for 2 seconds)
       }
 
       var data = canvas.toDataURL('image/png')
       dataImage.push(data)
       photo.setAttribute('src', data)
-
-
     } else {
       clearphoto()
     }
